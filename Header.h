@@ -28,6 +28,11 @@ public:
     int getYear();
     int getDays(); //геттеры
     static double koeff; //районный коэффициент
+    static double nolog;// процент налога
+    static double pens;// процент пенсии
+    char* buff = new char [512];
+
+  
     
 private:
     char* creds; //ФИО
@@ -35,7 +40,6 @@ private:
     int year; //год поступления
     int days; //кол-во отработанных дней за месяц
 };
-// laba1
 
 
 #endif /* Header_h */

@@ -2,11 +2,13 @@
 //laba1
 
 double Payment::koeff = 1.68;
+double Payment::nolog = 0.13;
+double Payment::pens = 0.1;
 
 Payment::Payment()
 {
     this->creds = new char[2];
-    strcpy(this->creds, " ");
+    strcpy(this->creds, "");
     this->salary = 0;
     this->year = 0;
     this->days = 0;
@@ -25,15 +27,20 @@ Payment::Payment(char* creds, double salary, int year, int days)
 Payment::~Payment()
 {
     delete [] this->creds;
+    delete [] this->buff;
 }
 
 Payment::Payment(const Payment &t)
 {
-    this->creds = new char[strlen(t.creds)];
+    this->creds = new char[strlen(t.creds)+1];
     strcpy(this->creds, t.creds);
     this->salary = t.salary;
     this->year = t.year;
     this->days = t.days;
+    cout << this->creds << "\n";
+    cout << this->salary << "\n";
+    cout << this->year << "\n";
+    cout << this->days << "\n";
 
 }
 
@@ -87,18 +94,17 @@ double Payment::salaryCount()
 
 double Payment::pension()
 {
-    return this->salaryCount() * 0.01;
+    return this->salaryCount() * pens;
 }
 
 double Payment::plotiNologe()
 {
-    return this->salaryCount() * 0.13;
+    return this->salaryCount() * nolog;
 }
 
 char* Payment::toString()
 {
-    char* buff = new char [512];
-    sprintf(buff, "%s %f %d %d", this->creds, this->salary, this->year, this->days);
-    return buff;
+    sprintf(this->buff, "%s %f %d %d", this->creds, this->salary, this->year, this->days);
+    return this->buff;
 }
 

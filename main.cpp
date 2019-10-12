@@ -1,6 +1,5 @@
 #include "Header.h"
 
-//laba1
 int menu()
 {
     int a;
@@ -15,11 +14,12 @@ int menu()
 
 void addInfo ()
 {
-    char* creds;
+    //контейнер
+    char* creds = new char [64];
     double salary;
     int year, days, a;
     cout << "Введите имечко фамилию" << "\t";
-    cin >> creds;
+    cin.getline(creds,64);
     cout << "Введите дневной оклад" << "\t";
     cin >> salary;
     cout << "Введите в каком году работяга поступил на завод" << "\t";
@@ -28,28 +28,7 @@ void addInfo ()
     cin >> days;
     cout << "Выберите работягу: 1,2,3" << "\n";
     cin >> a;
-    switch (a)
-    {
-    case 1:
-        {
-            Payment rabotyaga1 (creds,salary, year, days);
-            break;
-            
-        }
-    case 2:
-        {
-            Payment rabotyaga2 (creds,salary, year, days);
-            break;
-        }
-    case 3:
-        {
-            Payment rabotyaga3 (creds,salary, year, days);
-            break;
-        }
-        default: cout << "Нет такого работяги" << "\n";
-        
-    }
-    
+    delete [] creds;
 }
 
 
@@ -59,8 +38,9 @@ int main()
     Payment rabotyaga1;
     Payment rabotyaga2 ("Vasya Pupkin",3215.67, 2007, 22);
     Payment rabotyaga3 = rabotyaga2;
+    Payment rabotyaga4(rabotyaga3);
     
-   rabotyaga3.setCreds("Pupa Lupin");
+    rabotyaga3.setCreds("Pupa Lupin");
     rabotyaga3.setSalary(3551.64);
     rabotyaga3.setYear(2013);
     rabotyaga3.setDays(19);
@@ -88,15 +68,15 @@ int main()
             cout << rabotyaga1.plotiNologe() << "\n";
             cout << rabotyaga2.plotiNologe() << "\n";
             cout << rabotyaga3.plotiNologe() << "\n";
+                break;
             }
             case 4:
             {
              cout << rabotyaga1.toString() << "\n";
              cout << rabotyaga2.toString() << "\n";
-             cout << rabotyaga2.toString() << "\n";
+             cout << rabotyaga3.toString() << "\n";
              break;
             }
-                
             default:
                 return 0;
         }
