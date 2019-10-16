@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
+#include <vector>
 
 using namespace std;
 
@@ -31,7 +32,16 @@ public:
     static double nolog;// процент налога
     static double pens;// процент пенсии
     char* buff = new char [512];
-
+    Payment& operator=(const Payment &arg);//оператор присваивания;
+    friend const Payment operator+(const Payment &left, const double right);
+    friend const Payment operator-(const Payment &left, const double right);
+    friend Payment& operator+=(Payment& left, const double right);
+    friend Payment& operator-=(Payment& left, const double right);
+    friend const Payment& operator++(Payment& i);
+    friend const Payment operator++(Payment& i, int a);
+    friend const Payment& operator--(Payment& i);
+    friend const Payment operator--(Payment& i, int a);
+    double operator()();
   
     
 private:

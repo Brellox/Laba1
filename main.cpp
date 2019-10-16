@@ -1,5 +1,6 @@
 #include "Header.h"
 
+vector <Payment> rabotyaga;
 int menu()
 {
     int a;
@@ -12,9 +13,26 @@ int menu()
     
 }
 
-void addInfo ()
+void addRabotyaga ()
 {
-    //контейнер
+    char* creds = new char [64];
+    double salary;
+    int year, days;
+    cout << "Введите имечко фамилию" << "\t";
+    cin.getline(creds,64);
+    cout << "Введите дневной оклад" << "\t";
+    cin >> salary;
+    cout << "Введите в каком году работяга поступил на завод" << "\t";
+    cin >> year;
+    cout << "Введите сколько дней в месяце отработал работяга" << "\t";
+    cin >> days;
+    Payment rabotyaga1(creds,salary,year,days);
+    rabotyaga.push_back(rabotyaga1);
+    delete [] creds;
+}
+
+/*void changeInfo()
+{
     char* creds = new char [64];
     double salary;
     int year, days, a;
@@ -26,16 +44,19 @@ void addInfo ()
     cin >> year;
     cout << "Введите сколько дней в месяце отработал работяга" << "\t";
     cin >> days;
-    cout << "Выберите работягу: 1,2,3" << "\n";
+    cout << "Введите номер работяги" << "\t";
     cin >> a;
+    Payment rabotyaga1(creds,salary,year,days);
+    rabotyaga[a] = rabotyaga1;
     delete [] creds;
 }
-
+*/
 
 int main()
 {
     setlocale(LC_ALL,"Russian");
-    Payment rabotyaga1;
+    
+   /* Payment rabotyaga1;
     Payment rabotyaga2 ("Vasya Pupkin",3215.67, 2007, 22);
     Payment rabotyaga3 = rabotyaga2;
     Payment rabotyaga4(rabotyaga3);

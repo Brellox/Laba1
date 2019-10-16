@@ -108,3 +108,68 @@ char* Payment::toString()
     return this->buff;
 }
 
+Payment& Payment::operator=(const Payment &arg)
+{
+    if (this == &arg) {
+        return *this;
+    }
+    creds = arg.creds;
+    salary = arg.salary;
+    year = arg.year;
+    days = arg.days;
+    return *this;
+}
+
+const Payment operator+(const Payment &left, const double right)
+{
+    return Payment(left.creds, left.salary + right, left.year, left.days);
+}
+
+const Payment operator-(const Payment &left, const double right)
+{
+    return Payment(left.creds, left.salary - right, left.year, left.days);
+}
+
+Payment& operator+=(Payment &left, const double right)
+{
+    left.salary += right;
+    return left;
+}
+
+Payment& operator-=(Payment &left, const double right)
+{
+    left.salary -= right;
+    return left;
+}
+
+const Payment& operator++(Payment& i)
+{
+    i.year++;
+    return i;
+}
+
+const Payment operator++(Payment& i, int a)
+{
+    Payment oldValue(i.creds, i.salary, i.year, i.days);
+    i.year++;
+    return oldValue;
+}
+
+const Payment& operator--(Payment& i)
+{
+    i.year--;
+    return i;
+}
+
+const Payment operator--(Payment& i, int a)
+{
+    Payment oldValue(i.creds, i.salary, i.year, i.days);
+    i.year--;
+    return oldValue;
+}
+
+double Payment::operator() ()
+{
+    return this->salary*koeff*this->days - this->salary*koeff*this->days*pens - this->salary*koeff*this->days*nolog;
+}
+
