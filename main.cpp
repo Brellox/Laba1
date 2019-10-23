@@ -30,7 +30,7 @@ void out()
     int n;
     cout << "Введите номер работяги которого хотите вывести:" << "\t";
     cin >> n;
-    rabotyaga[n].toString();
+    cout << rabotyaga[n].toString() << "\n";
 }
 
 void countSalary()
@@ -100,6 +100,7 @@ void changeInfo()
     double salary;
     int year, days, n;
     cout << "Введите имечко фамилию" << "\t";
+    cin.get();
     cin.getline(creds,64);
     cout << "Введите дневной оклад" << "\t";
     cin >> salary;
@@ -120,7 +121,8 @@ void addRabotyaga ()
     char* creds = new char [64];
     double salary;
     int year, days;
-    cout << "Введите имечко фамилию" << "\n";
+    cout << "Введите имечко фамилию" << "\t";
+    cin.get();
     cin.getline(creds,64);
     cout << "Введите дневной оклад" << "\t";
     cin >> salary;
