@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Payment
+class Payment // описание класса
 {
 public:
     double salaryCount(); //рассчет суммы зарплаты

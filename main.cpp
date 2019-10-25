@@ -17,7 +17,7 @@ int menu()
     
 }
 
-void test ()
+void test () // просто показать
 {
     double diff = 12.34;
     rabotyaga[0] = rabotyaga[1] + diff;
