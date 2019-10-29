@@ -2,6 +2,24 @@
 
 vector <Payment> rabotyaga;
 
+void fout()
+{
+    ofstream out;
+    out.open("out.txt");
+    out <<rabotyaga[0];
+    out.close();
+}
+
+void fin()
+{
+    Payment trabotyaga;
+    ifstream in;
+    in.open("in.txt");
+    in >> trabotyaga;
+    in.close();
+    rabotyaga.push_back(trabotyaga);
+}
+
 int menu()
 {
     int a;
@@ -11,13 +29,15 @@ int menu()
     cout << "4 - изменить год поступления работяги" << "\n";
     cout << "5 - рассчитать зп работяги" << "\n";
     cout << "6 - вывести данные работяги" << "\n";
+    cout << "7 - файловый вывод" << "\n";
+    cout << "8 - файловый ввод" << "\n";
     cout << "9 - просто показать что оно живое" << "\n";
     cin >> a;
     return a;
     
 }
 
-void test () // просто показать
+void test ()
 {
     double diff = 12.34;
     rabotyaga[0] = rabotyaga[1] + diff;
@@ -137,6 +157,11 @@ void addRabotyaga ()
 
 int main()
 {
+    ofstream binout;
+    binout.open("binout.dat", ios::binary);
+    Payment testrabotyaga("Sanya Bulat", 9999, 2019, 30);
+    testrabotyaga.write(binout);
+    binout.close();;
     setlocale(LC_ALL,"Russian");
     for(;;)
     {
@@ -174,6 +199,16 @@ int main()
             case 6:
             {
                 out();
+                break;
+            }
+            case 7:
+            {
+                fout();
+                break;
+            }
+            case 8:
+            {
+                fin();
                 break;
             }
             case 9:

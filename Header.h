@@ -3,6 +3,7 @@
 #define Header_h
 
 #include <iostream>
+#include <fstream>
 #include <cstring>
 #include <cstdio>
 #include <vector>
@@ -42,7 +43,11 @@ public:
     friend const Payment& operator--(Payment& i);
     friend const Payment operator--(Payment& i, int a);
     double operator()();
-  
+    friend ostream& operator<<(ostream& out, const Payment& rabotyaga);
+    friend istream& operator>>(istream& in, Payment& rabotyaga);
+    void write(ofstream& out);
+    static ifstream& read(ifstream in);
+    
     
 private:
     char* creds; //ФИО

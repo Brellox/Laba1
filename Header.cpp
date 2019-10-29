@@ -37,11 +37,6 @@ Payment::Payment(const Payment &t)
     this->salary = t.salary;
     this->year = t.year;
     this->days = t.days;
-    cout << this->creds << "\n";
-    cout << this->salary << "\n";
-    cout << this->year << "\n";
-    cout << this->days << "\n";
-
 }
 
 void Payment::setCreds(char* creds)
@@ -173,3 +168,24 @@ double Payment::operator() ()
     return this->salary*koeff*this->days - this->salary*koeff*this->days*pens - this->salary*koeff*this->days*nolog;
 }
 
+ostream& operator<<(ostream& out, const Payment& rabotyaga)
+{
+    out << rabotyaga.creds << "\n" << rabotyaga.salary << "\n" << rabotyaga.year << "\n" << rabotyaga.days;
+    return out;
+}
+
+istream& operator>>(istream& in, Payment& rabotyaga)
+{
+    char* temp = new char[64];
+    in.getline (temp, 63);
+    rabotyaga.setCreds(temp);
+    in >> rabotyaga.salary;
+    in >> rabotyaga.year;
+    in >> rabotyaga.days;
+    return in;
+}
+
+void Payment::write(ofstream& out)
+{
+    out.write((char*)this, sizeof(*this));
+}
