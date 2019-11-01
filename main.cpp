@@ -2,6 +2,26 @@
 
 vector <Payment> rabotyaga;
 
+void bOut()
+{
+    ofstream binout;
+    int i;
+    cout << "Введите номер работяги, которого хотите вывести в бинарник" << "\t";
+    cin >> i;
+    binout.open("binout.dat", ios::binary);
+    rabotyaga[i].write(binout);
+    binout.close();
+}
+
+void bIn()
+{
+    ifstream binin;
+    binin.open("bin.dat", ios::binary);
+    Payment temprabotyaga;
+    Payment::read(binin, temprabotyaga);
+    binin.close();
+    rabotyaga.push_back(temprabotyaga);
+}
 void fout()
 {
     ofstream out;
@@ -31,7 +51,9 @@ int menu()
     cout << "6 - вывести данные работяги" << "\n";
     cout << "7 - файловый вывод" << "\n";
     cout << "8 - файловый ввод" << "\n";
-    cout << "9 - просто показать что оно живое" << "\n";
+    cout << "9 - считать из бинарника" << "\n";
+    cout << "10 - записать в бинарник" << "\n";
+    cout << "99 - просто показать что оно живое" << "\n";
     cin >> a;
     return a;
     
@@ -157,11 +179,6 @@ void addRabotyaga ()
 
 int main()
 {
-    ofstream binout;
-    binout.open("binout.dat", ios::binary);
-    Payment testrabotyaga("Sanya Bulat", 9999, 2019, 30);
-    testrabotyaga.write(binout);
-    binout.close();;
     setlocale(LC_ALL,"Russian");
     for(;;)
     {
@@ -212,6 +229,16 @@ int main()
                 break;
             }
             case 9:
+            {
+                bIn();
+                break;
+            }
+            case 10:
+            {
+                bOut();
+                break;
+            }
+            case 99:
             {
                 test();
                 break;

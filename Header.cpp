@@ -187,5 +187,23 @@ istream& operator>>(istream& in, Payment& rabotyaga)
 
 void Payment::write(ofstream& out)
 {
-    out.write((char*)this, sizeof(*this));
+    out.write((char*)&this->salary, sizeof(double));
+    out.write((char*)&this->year, sizeof(int));
+    out.write((char*)&this->days, sizeof(int));
+    int temp = strlen(this->creds);
+    out.write((char*)&temp, sizeof(int));
+    out.write((char*)this->creds, temp);
+}
+
+ifstream& Payment::read(ifstream& in, Payment& rabotyaga)
+{
+    in.read((char*)&rabotyaga.salary, sizeof(double));
+    in.read((char*)&rabotyaga.year, sizeof(int));
+    in.read((char*)&rabotyaga.days, sizeof(int));
+    int temp = 0;
+    in.read((char*)&temp, sizeof(int));
+    rabotyaga.creds = new char[temp+1];
+    in.read((char*)rabotyaga.creds, temp);
+    rabotyaga.creds[temp]='\0';
+    return in;
 }

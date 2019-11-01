@@ -46,14 +46,15 @@ public:
     friend ostream& operator<<(ostream& out, const Payment& rabotyaga);
     friend istream& operator>>(istream& in, Payment& rabotyaga);
     void write(ofstream& out);
-    static ifstream& read(ifstream in);
+    static ifstream& read(ifstream& in, Payment& rabotyaga);
     
     
 private:
-    char* creds; //ФИО
+    
     double salary; // оклад за день
     int year; //год поступления
     int days; //кол-во отработанных дней за месяц
+    char* creds; //ФИО
 };
 
 
