@@ -57,5 +57,41 @@ private:
     char* creds; //ФИО
 };
 
+class CoWorker : public Payment
+{
+public:
+    CoWorker(); //конструктор
+    CoWorker(char* creds, double salary, int year, int days, char* position, double wk); //конструктор с параметрами
+    ~CoWorker(); //деструктор
+    CoWorker(const CoWorker &t); //конструктор копированиия
+    void setWk(double wk);
+    void setPosition(char* position);
+    double getWk();
+    char* getPosition();
+    
+private:
+    double wk;
+    char* position;
+};
+
+class Worker : public Payment
+{
+public:
+    Worker(); //конструктор
+    Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours); //конструктор с параметрами
+    ~Worker(); //деструктор
+    Worker(const Worker &t); //конструктор копированиия
+    void setHourSalary(double hourSalary);
+    void setHours(int hours);
+    void setProfession(char* profession);
+    double getHourSalary();
+    int getHours();
+    char* getProfession();
+    
+private:
+    double hourSalary;
+    int hours;
+    char* profession;
+};
 
 #endif /* Header_h */

@@ -25,8 +25,11 @@ void bIn()
 void fout()
 {
     ofstream out;
+    int i;
+    cout << "Введите номер работяги, которого собираетесь вывести:" << "\t";
+    cin >> i;
     out.open("out.txt");
-    out <<rabotyaga[0];
+    out <<rabotyaga[i];
     out.close();
 }
 

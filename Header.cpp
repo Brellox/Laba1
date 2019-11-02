@@ -108,7 +108,10 @@ Payment& Payment::operator=(const Payment &arg)
     if (this == &arg) {
         return *this;
     }
-    creds = arg.creds;
+    delete [] creds;
+    creds = new char[strlen(arg.creds)+1];
+    memcpy(creds, arg.creds, strlen(arg.creds)+1);
+    //creds = arg.creds;
     salary = arg.salary;
     year = arg.year;
     days = arg.days;
@@ -206,4 +209,51 @@ ifstream& Payment::read(ifstream& in, Payment& rabotyaga)
     in.read((char*)rabotyaga.creds, temp);
     rabotyaga.creds[temp]='\0';
     return in;
+}
+
+CoWorker::CoWorker()
+{
+    Payment();
+    this->position = new char[2];
+    strcpy(this->position, "");
+    this->wk = 0;
+}
+
+CoWorker::CoWorker(char* creds, double salary, int year, int days, char* position, double wk)
+{
+    Payment(creds, salary, year, days);
+    this->position = new char[strlen(position)+1];
+    strcpy(this->position, position);
+    this->wk = wk;
+}
+
+CoWorker::~CoWorker()
+{
+    delete [] this->position;
+}
+
+CoWorker::CoWorker(const CoWorker &t)
+{
+   
+}
+
+void CoWorker::setWk(double wk)
+{
+    this->wk = wk;
+}
+void CoWorker::setPosition(char* position)
+{
+    delete this->position;
+    this->position = new char[strlen(position)+1];
+    strcpy(this->position, position);
+}
+
+double CoWorker::getWk()
+{
+    return wk;
+}
+
+char* CoWorker::getPosition()
+{
+    return position;
 }
