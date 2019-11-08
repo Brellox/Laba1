@@ -173,11 +173,22 @@ double Payment::operator() ()
 
 ostream& operator<<(ostream& out, const Payment& rabotyaga)
 {
-    out << rabotyaga.creds << "\n" << rabotyaga.salary << "\n" << rabotyaga.year << "\n" << rabotyaga.days;
+    out << rabotyaga.creds << "\n" << rabotyaga.salary << "\n" << rabotyaga.year << "\n" << rabotyaga.days << "\n";
     return out;
 }
 
 istream& operator>>(istream& in, Payment& rabotyaga)
+{
+    char* temp = new char[64];
+    in.getline (temp, 63);
+    rabotyaga.setCreds(temp);
+    in >> rabotyaga.salary;
+    in >> rabotyaga.year;
+    in >> rabotyaga.days;
+    return in;
+}
+
+ifstream& operator>>(ifstream& in, Payment& rabotyaga)
 {
     char* temp = new char[64];
     in.getline (temp, 63);

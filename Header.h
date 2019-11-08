@@ -45,6 +45,7 @@ public:
     double operator()();
     friend ostream& operator<<(ostream& out, const Payment& rabotyaga);
     friend istream& operator>>(istream& in, Payment& rabotyaga);
+    friend ifstream& operator>>(ifstream& in, Payment& rabotyaga);
     void write(ofstream& out);
     static ifstream& read(ifstream& in, Payment& rabotyaga);
     

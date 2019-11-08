@@ -8,7 +8,7 @@ void bOut()
     int i;
     cout << "Введите номер работяги, которого хотите вывести в бинарник" << "\t";
     cin >> i;
-    binout.open("binout.dat", ios::binary);
+    binout.open("bin.dat", ios::binary | ios::app);
     rabotyaga[i].write(binout);
     binout.close();
 }
@@ -28,7 +28,9 @@ void fout()
     int i;
     cout << "Введите номер работяги, которого собираетесь вывести:" << "\t";
     cin >> i;
-    out.open("out.txt");
+    out.open("text.txt", ios::app);
+    if(!out.is_open())
+        out.open("text.txt");
     out <<rabotyaga[i];
     out.close();
 }
@@ -37,10 +39,15 @@ void fin()
 {
     Payment trabotyaga;
     ifstream in;
-    in.open("in.txt");
-    in >> trabotyaga;
+    in.open("text.txt");
+    for (int i = 0; in.peek() != EOF; i++)
+    {
+        in >> trabotyaga;
+        if (!in.eof())
+            rabotyaga.push_back(trabotyaga);
+    }
     in.close();
-    rabotyaga.push_back(trabotyaga);
+    
 }
 
 int menu()
