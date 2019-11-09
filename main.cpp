@@ -15,12 +15,16 @@ void bOut()
 
 void bIn()
 {
+    Payment temprabotyaga;
     ifstream binin;
     binin.open("bin.dat", ios::binary);
-    Payment temprabotyaga;
-    Payment::read(binin, temprabotyaga);
+    for (int i = 0; binin.peek() != EOF; i++)
+    {
+        Payment::read(binin, temprabotyaga);
+        if (!binin.eof())
+            rabotyaga.push_back(temprabotyaga);
+    }
     binin.close();
-    rabotyaga.push_back(temprabotyaga);
 }
 void fout()
 {
