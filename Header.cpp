@@ -244,9 +244,10 @@ CoWorker::~CoWorker()
     delete [] this->position;
 }
 
-CoWorker::CoWorker(const CoWorker &t)
+CoWorker::CoWorker(const CoWorker &t): Payment(t)
 {
-   
+    this->position = t.position;
+    this->wk = t.wk;
 }
 
 void CoWorker::setWk(double wk)
@@ -269,3 +270,109 @@ char* CoWorker::getPosition()
 {
     return position;
 }
+
+double CoWorker::salaryCount()
+{
+    return this->salary * this->days * koeff * wk;
+}
+
+double CoWorker::pension()
+{
+    return this->salaryCount() * pens;
+}
+
+double CoWorker::plotiNologe()
+{
+    return this->salaryCount() * nolog;
+}
+
+char* CoWorker::toString()
+{
+    sprintf(this->buff, "%s %s %f %f %d %d", this->creds, this->position, this->wk, this->salary, this->year, this->days);
+    return this->buff;
+}
+
+Worker::Worker()
+{
+    Payment();
+    this->profession = new char[2];
+    strcpy(this->profession, "");
+    this->hourSalary = 0;
+    this->hours = 0;
+}
+
+Worker::Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours)
+{
+    Payment(creds, salary, year, days);
+    this->profession = new char[strlen(profession)+1];
+    strcpy(this->profession, profession);
+    this->hours = hours;
+    this->hourSalary = hourSalary;
+}
+
+Worker::~Worker()
+{
+    delete [] this->profession;
+}
+
+Worker::Worker(const Worker &t): Payment(t)
+{
+    this->profession = t.profession;
+    this->hours = t.hours;
+    this->hourSalary = t.hourSalary;
+}
+
+void Worker::setHours(int hours)
+{
+    this->hours = hours;
+}
+
+void Worker::setHourSalary(double hourSalary)
+{
+    this->hourSalary = hourSalary;
+}
+
+void Worker::setProfession(char* profession)
+{
+    delete this->profession;
+    this->profession = new char[strlen(profession)+1];
+    strcpy(this->profession, profession);
+}
+
+double Worker::getHourSalary()
+{
+    return hourSalary;
+}
+
+int Worker::getHours()
+{
+    return hours;
+}
+
+char* Worker::getProfession()
+{
+    return profession;
+}
+
+double Worker::salaryCount()
+{
+    return this->hours * this->hourSalary * koeff * this->days;
+}
+
+double Worker::pension()
+{
+    return this->salaryCount() * pens;
+}
+
+double Worker::plotiNologe()
+{
+    return this->salaryCount() * nolog;
+}
+
+char* Worker::toString()
+{
+    sprintf(this->buff, "%s %s %f %f %d %d %d", this->creds, this->profession, this->hourSalary, this->salary, this->hours, this->year, this->days);
+    return this->buff;
+}
+
+//проблема с деструкторами

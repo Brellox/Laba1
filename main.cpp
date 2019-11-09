@@ -1,6 +1,8 @@
 #include "Header.h"
 
 vector <Payment> rabotyaga;
+vector <CoWorker> cw;
+vector <Worker> work;
 
 void bOut()
 {
@@ -191,9 +193,38 @@ void addRabotyaga ()
     delete [] creds;
 }
 
+void addCoWorker ()
+{
+    char* creds = new char [64];
+    char* position = new char[64];
+    double salary, wk;
+    int year, days;
+    cout << "Введите имечко фамилию" << "\t";
+    cin.get();
+    cin.getline(creds,64);
+    cout << "Введите должность" << "\t";
+    cin.get();
+    cin.getline(position,64);
+    cout << "Введите коэффициент надбавки за должность" << "\t";
+    cin >> wk;
+    cout << "Введите дневной оклад" << "\t";
+    cin >> salary;
+    cout << "Введите в каком году работяга поступил на завод" << "\t";
+    cin >> year;
+    cout << "Введите сколько дней в месяце отработал работяга" << "\t";
+    cin >> days;
+    CoWorker rabotyaga1(creds,salary,year,days,position,wk);
+    cw.push_back(rabotyaga1);
+    delete [] creds;
+    delete [] position;
+}
+
 int main()
 {
     setlocale(LC_ALL,"Russian");
+    addCoWorker();
+    addCoWorker();
+    cout << cw[0].toString() << "\n" << cw[1].toString();
     for(;;)
     {
         switch (menu())

@@ -19,7 +19,7 @@ public:
     char* toString(); //представление в стринг
     Payment(); //конструктор
     Payment(char* creds, double salary, int year, int days); //конструктор с параметрами
-    ~Payment(); //деструктор
+    virtual ~Payment(); //деструктор
     Payment(const Payment &t); //конструктор копированиия
     void setCreds(char* creds);
     void setSalary(double salary);
@@ -50,7 +50,7 @@ public:
     static ifstream& read(ifstream& in, Payment& rabotyaga);
     
     
-private:
+protected:
     
     double salary; // оклад за день
     int year; //год поступления
@@ -69,6 +69,10 @@ public:
     void setPosition(char* position);
     double getWk();
     char* getPosition();
+    double salaryCount(); //рассчет суммы зарплаты
+    double pension(); //отчисления в пенсионный фонд
+    double plotiNologe(); //подоходный нологе
+    char* toString();
     
 private:
     double wk;
@@ -88,6 +92,10 @@ public:
     double getHourSalary();
     int getHours();
     char* getProfession();
+    double salaryCount(); //рассчет суммы зарплаты
+    double pension(); //отчисления в пенсионный фонд
+    double plotiNologe(); //подоходный нологе
+    char* toString();
     
 private:
     double hourSalary;
