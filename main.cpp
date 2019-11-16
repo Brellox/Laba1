@@ -216,7 +216,7 @@ void addCoWorker ()
     CoWorker rabotyaga1(creds,salary,year,days,position,wk);
     cw.push_back(rabotyaga1);
     delete [] creds;
-    delete [] position;
+    delete [] position;//че-то тут не то...
 }
 
 int main()

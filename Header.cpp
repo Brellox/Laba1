@@ -223,17 +223,15 @@ ifstream& Payment::read(ifstream& in, Payment& rabotyaga)
     return in;
 }
 
-CoWorker::CoWorker()
+CoWorker::CoWorker():Payment()
 {
-    Payment();
     this->position = new char[2];
     strcpy(this->position, "");
     this->wk = 0;
 }
 
-CoWorker::CoWorker(char* creds, double salary, int year, int days, char* position, double wk)
+CoWorker::CoWorker(char* creds, double salary, int year, int days, char* position, double wk):Payment(creds, salary, year, days)
 {
-    Payment(creds, salary, year, days);
     this->position = new char[strlen(position)+1];
     strcpy(this->position, position);
     this->wk = wk;
@@ -242,7 +240,7 @@ CoWorker::CoWorker(char* creds, double salary, int year, int days, char* positio
 CoWorker::~CoWorker()
 {
     delete [] this->position;
-}
+}//problem
 
 CoWorker::CoWorker(const CoWorker &t): Payment(t)
 {
@@ -292,18 +290,16 @@ char* CoWorker::toString()
     return this->buff;
 }
 
-Worker::Worker()
+Worker::Worker():Payment()
 {
-    Payment();
     this->profession = new char[2];
     strcpy(this->profession, "");
     this->hourSalary = 0;
     this->hours = 0;
 }
 
-Worker::Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours)
+Worker::Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours):Payment(creds, salary, year, days)
 {
-    Payment(creds, salary, year, days);
     this->profession = new char[strlen(profession)+1];
     strcpy(this->profession, profession);
     this->hours = hours;
@@ -313,7 +309,7 @@ Worker::Worker(char* creds, double salary, int year, int days, char* profession,
 Worker::~Worker()
 {
     delete [] this->profession;
-}
+}// problem
 
 Worker::Worker(const Worker &t): Payment(t)
 {
