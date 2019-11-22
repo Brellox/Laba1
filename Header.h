@@ -73,6 +73,8 @@ public:
     double pension(); //отчисления в пенсионный фонд
     double plotiNologe(); //подоходный нологе
     char* toString();
+    friend ostream& operator<<(ostream& out, const CoWorker& cw);
+    friend istream& operator>>(istream& in, CoWorker& cw);
     
 private:
     double wk;
@@ -83,22 +85,21 @@ class Worker : public Payment
 {
 public:
     Worker(); //конструктор
-    Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours); //конструктор с параметрами
+    Worker(char* creds, double salary, int year, int days, char* profession, int hours); //конструктор с параметрами
     ~Worker(); //деструктор
     Worker(const Worker &t); //конструктор копированиия
-    void setHourSalary(double hourSalary);
     void setHours(int hours);
     void setProfession(char* profession);
-    double getHourSalary();
     int getHours();
     char* getProfession();
     double salaryCount(); //рассчет суммы зарплаты
     double pension(); //отчисления в пенсионный фонд
     double plotiNologe(); //подоходный нологе
     char* toString();
+    friend ostream& operator<<(ostream& out, const Worker& work);
+    friend istream& operator>>(istream& in, Worker& work);
     
 private:
-    double hourSalary;
     int hours;
     char* profession;
 };

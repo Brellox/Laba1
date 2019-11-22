@@ -27,6 +27,7 @@ Payment::Payment(char* creds, double salary, int year, int days)
 
 Payment::~Payment()
 {
+    //cout << __FUNCTION__ << endl;
     delete [] this->creds;
     delete [] this->buff;
 }
@@ -239,12 +240,14 @@ CoWorker::CoWorker(char* creds, double salary, int year, int days, char* positio
 
 CoWorker::~CoWorker()
 {
+    //cout << __FUNCTION__ << endl;
     delete [] this->position;
 }//problem
 
 CoWorker::CoWorker(const CoWorker &t): Payment(t)
 {
-    this->position = t.position;
+    this->position = new char[strlen(t.position)+1];
+    strcpy(this->position, t.position);
     this->wk = t.wk;
 }
 
@@ -290,32 +293,54 @@ char* CoWorker::toString()
     return this->buff;
 }
 
+ostream& operator<<(ostream& out, const CoWorker& cw)
+{
+    out << cw.salary << " " << cw.wk << " " << cw.year << " " << cw.days << cw.creds << " " << cw.position << "\n";
+    return out;
+}
+
+istream& operator>>(istream& in, CoWorker& cw)
+{
+    in >> cw.salary;
+    in >> cw.year;
+    in >> cw.days;
+    in >> cw.wk;
+    char* temp = new char[64];
+    in.getline (temp, 63);
+    cw.setCreds(temp);
+    char* temp1 = new char[64];
+    in.getline(temp1, 63);
+    cw.setPosition(temp1);
+    delete [] temp1;
+    delete [] temp;
+    return in;
+}
+
 Worker::Worker():Payment()
 {
     this->profession = new char[2];
     strcpy(this->profession, "");
-    this->hourSalary = 0;
     this->hours = 0;
 }
 
-Worker::Worker(char* creds, double salary, int year, int days, char* profession, double hourSalary, int hours):Payment(creds, salary, year, days)
+Worker::Worker(char* creds, double salary, int year, int days, char* profession, int hours):Payment(creds, salary, year, days)
 {
     this->profession = new char[strlen(profession)+1];
     strcpy(this->profession, profession);
     this->hours = hours;
-    this->hourSalary = hourSalary;
 }
 
 Worker::~Worker()
 {
+    cout << __FUNCTION__ << endl;
     delete [] this->profession;
 }// problem
 
 Worker::Worker(const Worker &t): Payment(t)
 {
-    this->profession = t.profession;
+    this->profession = new char[strlen(t.profession)+1];
+    strcpy(this->profession, t.profession);
     this->hours = t.hours;
-    this->hourSalary = t.hourSalary;
 }
 
 void Worker::setHours(int hours)
@@ -323,21 +348,11 @@ void Worker::setHours(int hours)
     this->hours = hours;
 }
 
-void Worker::setHourSalary(double hourSalary)
-{
-    this->hourSalary = hourSalary;
-}
-
 void Worker::setProfession(char* profession)
 {
     delete this->profession;
     this->profession = new char[strlen(profession)+1];
     strcpy(this->profession, profession);
-}
-
-double Worker::getHourSalary()
-{
-    return hourSalary;
 }
 
 int Worker::getHours()
@@ -352,7 +367,7 @@ char* Worker::getProfession()
 
 double Worker::salaryCount()
 {
-    return this->hours * this->hourSalary * koeff * this->days;
+    return this->hours * this->salary * koeff * this->days;
 }
 
 double Worker::pension()
@@ -367,8 +382,29 @@ double Worker::plotiNologe()
 
 char* Worker::toString()
 {
-    sprintf(this->buff, "%s %s %f %f %d %d %d", this->creds, this->profession, this->hourSalary, this->salary, this->hours, this->year, this->days);
+    sprintf(this->buff, "%s %s %f %d %d %d", this->creds, this->profession, this->salary, this->hours, this->year, this->days);
     return this->buff;
 }
 
-//проблема с деструкторами
+ostream& operator<<(ostream& out, const Worker& work)
+{
+    out << work.salary << " " << work.hours << " " << work.year << " " << work.days << work.creds << " " << work.profession << "\n";
+    return out;
+}
+
+istream& operator>>(istream& in, Worker& work)
+{
+    in >> work.salary;
+    in >> work.year;
+    in >> work.days;
+    in >> work.hours;
+    char* temp = new char[64];
+    in.getline (temp, 63);
+    work.setCreds(temp);
+    char* temp1 = new char[64];
+    in.getline(temp1, 63);
+    work.setProfession(temp1);
+    delete [] temp1;
+    delete [] temp;
+    return in;
+}

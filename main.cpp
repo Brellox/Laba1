@@ -69,6 +69,10 @@ int menu()
     cout << "8 - файловый ввод" << "\n";
     cout << "9 - считать из бинарника" << "\n";
     cout << "10 - записать в бинарник" << "\n";
+    cout << "11 - добавить сотрудника" << "\n";
+    cout << "12 - добавить работягу" << "\n";
+    cout << "13 - заставить работать сотрудника" << "\n";
+    cout << "14 - заставить работать работягу" << "\n";
     cout << "99 - просто показать что оно живое" << "\n";
     cin >> a;
     return a;
@@ -202,8 +206,7 @@ void addCoWorker ()
     cout << "Введите имечко фамилию" << "\t";
     cin.get();
     cin.getline(creds,64);
-    cout << "Введите должность" << "\t";
-    cin.get();
+    cout << "Введите должность" << "\n";
     cin.getline(position,64);
     cout << "Введите коэффициент надбавки за должность" << "\t";
     cin >> wk;
@@ -216,15 +219,61 @@ void addCoWorker ()
     CoWorker rabotyaga1(creds,salary,year,days,position,wk);
     cw.push_back(rabotyaga1);
     delete [] creds;
-    delete [] position;//че-то тут не то...
+    delete [] position;
+}
+
+void addWorker ()
+{
+    char* creds = new char [64];
+    char* profession = new char[64];
+    double salary;
+    int year, days, hours;
+    cout << "Введите имечко фамилию" << "\t";
+    cin.get();
+    cin.getline(creds,64);
+    cout << "Введите профессию" << "\n";
+    cin.getline(profession,64);
+    cout << "Введите заработок за час" << "\t";
+    cin >> salary;
+    cout << "Введите сколько часов отработал работник" << "\t";
+    cin >> hours;
+    cout << "Введите в каком году работяга поступил на завод" << "\t";
+    cin >> year;
+    cout << "Введите сколько дней в месяце отработал работяга" << "\t";
+    cin >> days;
+    Worker rabotyaga1(creds,salary,year,days,profession,hours);
+    work.push_back(rabotyaga1);
+    delete [] creds;
+    delete [] profession;
+}
+
+void workWorker()
+{
+    int i;
+    cout << "Введите номер рабочего, которого заставляем работать:" << "\t";
+    cin >> i;
+    cout << work[i].toString() << "\n";
+    cout << "Зарплата работяги: " << work[i].salaryCount() << "\n";
+    cout << "Отчисления в ПФР: " << work[i].pension() << "\n";
+    cout << "Отчисления в ФНС: " << work[i].plotiNologe() << "\n";
+    
+}
+
+void workCoWorker()
+{
+    int i;
+    cout << "Введите номер сотрудника, которого заставляем работать:" << "\t";
+    cin >> i;
+    cout << cw[i].toString() << "\n";
+    cout << "Доход сотрудника: " << cw[i].salaryCount() << "\n";
+    cout << "Отчисления в ПФР: " << cw[i].pension() << "\n";
+    cout << "Отчисления в ФНС: " << cw[i].plotiNologe() << "\n";
+    
 }
 
 int main()
 {
     setlocale(LC_ALL,"Russian");
-    addCoWorker();
-    addCoWorker();
-    cout << cw[0].toString() << "\n" << cw[1].toString();
     for(;;)
     {
         switch (menu())
@@ -281,6 +330,26 @@ int main()
             case 10:
             {
                 bOut();
+                break;
+            }
+            case 11:
+            {
+                addCoWorker();
+                break;
+            }
+            case 12:
+            {
+                addWorker();
+                break;
+            }
+            case 13:
+            {
+                workCoWorker();
+                break;
+            }
+            case 14:
+            {
+                workWorker();
                 break;
             }
             case 99:
