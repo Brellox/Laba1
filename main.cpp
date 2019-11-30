@@ -1,4 +1,5 @@
 #include "Header.h"
+#include "Deque.h"
 
 vector <Payment> rabotyaga;
 vector <CoWorker> cw;
